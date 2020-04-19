@@ -1,7 +1,7 @@
 class Play extends Phaser.Scene {
 
     //      time remaining (15)
-    // add time for successful hits (25)
+    //      add time for successful hits (25)
     // mouse control (25)
     // new animated sprite for enemies (15)
 
@@ -55,14 +55,15 @@ class Play extends Phaser.Scene {
 
         // timer display
         this.timeLeft = game.settings.gameTimer;
-        this.timeLeft = 10000;
+        //this.timeLeft = 10000;
         this.timeDisplay = this.add.text(470, 54, this.timeLeft / 1000, scoreConfig);
         // game over flag
         this.gameOver = false;
         // call function which decrements timeLeft every second
         this.decrementTimer();
 
-
+        // high score display
+        this.highScore = this.add.text(269, 54, game.settings.highScore, scoreConfig);
 
         // ASSETS
         // add rocket (p1)
@@ -168,6 +169,13 @@ class Play extends Phaser.Scene {
         // increase time and repaint
         this.timeLeft += 2000;
         this.timeDisplay.text = this.timeLeft/1000;
+
+        // increase high score and repaint (if applicable)
+        if (this.p1Score > game.settings.highScore) {
+            game.settings.highScore = this.p1Score;
+            this.highScore.text = game.settings.highScore;
+        }
+
     }
 
     decrementTimer() {
