@@ -1,6 +1,6 @@
 class Play extends Phaser.Scene {
 
-    // time remaining (15)
+    //      time remaining (15)
     // add time for successful hits (25)
     // mouse control (25)
     // new animated sprite for enemies (15)
@@ -164,6 +164,10 @@ class Play extends Phaser.Scene {
         // score increment and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
+
+        // increase time and repaint
+        this.timeLeft += 2000;
+        this.timeDisplay.text = this.timeLeft/1000;
     }
 
     decrementTimer() {
