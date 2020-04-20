@@ -10,6 +10,7 @@ class Play extends Phaser.Scene {
         this.load.image('spaceship', './assets/spaceship.png');
         this.load.image('spaceship2', './assets/spaceship2.png');
         this.load.image('starfield', './assets/starfield.png');
+        this.load.image('particle', './assets/particle.png');
 
         // load explosion spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png',
@@ -163,6 +164,19 @@ class Play extends Phaser.Scene {
             ship.alpha = 1;                     // make ship visible again
             boom.destroy();                     // remove explosion sprite
         });
+
+        // particle
+        let particles = this.add.particles('particle');
+        let emitter = particles.createEmitter();
+        emitter.setPosition(ship.x, ship.y);
+        emitter.setSpeed(400);
+        // destroy particle emitter after set time
+        this.particleClock = this.time.delayedCall(200, () => {
+            particles.destroy();
+        }, null, this);
+
+
+        
 
         // score increment and repaint
         this.p1Score += ship.points;
