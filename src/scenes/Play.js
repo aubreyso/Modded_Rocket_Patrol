@@ -1,10 +1,5 @@
 class Play extends Phaser.Scene {
 
-    //      time remaining (15)
-    //      add time for successful hits (25)
-    // mouse control (25)
-    // new animated sprite for enemies (15)
-
     constructor() {
         super("playScene");
     }
@@ -13,6 +8,7 @@ class Play extends Phaser.Scene {
         // load images/tile sprite
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('spaceship2', './assets/spaceship2.png');
         this.load.image('starfield', './assets/starfield.png');
 
         // load explosion spritesheet
@@ -55,7 +51,6 @@ class Play extends Phaser.Scene {
 
         // timer display
         this.timeLeft = game.settings.gameTimer;
-        //this.timeLeft = 10000;
         this.timeDisplay = this.add.text(470, 54, this.timeLeft / 1000, scoreConfig);
         // game over flag
         this.gameOver = false;
@@ -63,7 +58,7 @@ class Play extends Phaser.Scene {
         this.decrementTimer();
 
         // high score display
-        this.highScore = this.add.text(269, 54, game.settings.highScore, scoreConfig);
+        this.highScore = this.add.text(269, 54,game.settings.highScore, scoreConfig);
 
         // ASSETS
         // add rocket (p1)
@@ -72,11 +67,13 @@ class Play extends Phaser.Scene {
                                     'rocket').setScale(0.5, 0.5).setOrigin(0, 0);
         // add spaceship (3x)
         this.ship01 = new Spaceship(this, this.game.config.width+192, 132,
-                                    'spaceship', 0, 30).setOrigin(0, 0);
+                                    'spaceship', 0, 30, 'standard').setOrigin(0, 0);
         this.ship02 = new Spaceship(this, this.game.config.width+96, 196,
-                                    'spaceship', 0, 20).setOrigin(0, 0);
+                                    'spaceship', 0, 20, 'standard').setOrigin(0, 0);
         this.ship03 = new Spaceship(this, this.game.config.width, 260,
-                                    'spaceship', 10, 10).setOrigin(0, 0);
+                                    'spaceship', 10, 10, 'standard').setOrigin(0, 0);
+        this.ship04 = new Spaceship(this, this.game.config.width, 300,
+                                    'spaceship2', 10, 25, 'fast').setOrigin(0, 0);
         // animation config
         this.anims.create({
             key: 'explode',
@@ -120,6 +117,7 @@ class Play extends Phaser.Scene {
             this.ship01.update();
             this.ship02.update();
             this.ship03.update();
+            this.ship04.update();
         }
 
         // check collisions
@@ -134,6 +132,10 @@ class Play extends Phaser.Scene {
         if(this.checkCollision(this.p1Rocket, this.ship01)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship01);
+        }
+        if(this.checkCollision(this.p1Rocket, this.ship04)) {
+            this.p1Rocket.reset();
+            this.shipExplode(this.ship04);
         }
     }
 
