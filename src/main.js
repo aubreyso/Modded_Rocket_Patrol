@@ -1,9 +1,9 @@
-//      (15) display for remaining time (top right)
-//      (25) add time for successful hits
-//      (10) persistent high score (top middle)
-//      (25) new ship type (smaller, faster, worth more)
-// mouse control (25)
-// new animated sprite for enemies (15)
+// Terence So
+// (15) display for remaining time (top right)
+// (25) add time for successful hits
+// (10) persistent high score (top middle)
+// (25) new ship type (smaller, faster, worth more)
+// (25) particle emitter when rocket hits the spaceship
 
 let config = {
     type: Phaser.CANVAS,
