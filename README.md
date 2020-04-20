@@ -1,2 +1,2 @@
 # RocketPatrol
-https://terencehso.github.io/RocketPatrol/
+https://terencehso.github.io/Modded_Rocket_Patrol/
